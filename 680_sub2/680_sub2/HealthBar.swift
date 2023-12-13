@@ -36,14 +36,14 @@ struct HealthBar: View {
                 // creating a rectangle for the repaining health + corresponding color
                 Rectangle()
                     // uses CGFloat - Float is not flexible, whereas CGFloat adapts
-                    .frame(width: min(CGFloat(health) / 100 * geometry.size.width, geometry.size.width), height: 20)
+                    .frame(width: min(CGFloat(health) / 200 * geometry.size.width, geometry.size.width), height: 20)
                     .foregroundColor(healthColor)
             }
         }
     }
     private var healthColor: Color {
         // basic logic for the color
-        let percentage = health / 100
+        let percentage = health / 200
         
         // if its over 50% or .5, then its green
         if percentage > 0.5 {

@@ -71,9 +71,8 @@ public struct BattleView: View {
                         // healthBar
                         // time to implement this, i would have to pass a double to access the info to display the correct healthbar ?
                         HealthBar(health: $userHealth)
-                            .frame(width: 150)
+                            .frame(width: 200)
                             .padding()
- 
                     }
                     .padding()
                     Spacer()
@@ -98,6 +97,9 @@ public struct BattleView: View {
                             .foregroundColor(.black)
                             .padding()
                         // insert healthbar
+                        HealthBar(health: $opponentHealth)
+                            .frame(width: 200)
+                            .padding()
                     }
                     .padding()
                     Spacer()
@@ -139,8 +141,18 @@ public struct BattleView: View {
             .background(Color.blue.opacity(0.5))
             .cornerRadius(10)
             .padding()
+            
+            // checking if gameresult is not empty. if it is not, then we have a winner. its time to go to the Results page.
+            if gameResult != nil {
+                NavigationLink(destination: Results(),
+                isActive: .constant(true)
+                ) {
+                }
+                .padding()
+            }
         }
     }
+        
     private func startBackgroundMusic(){
         
     }

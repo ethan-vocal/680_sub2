@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Results: View {
     var body: some View{
-        
+        VStack{
+            Text("Yippie")
+        }
     }
 }
