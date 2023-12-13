@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+// components of a Move: name + damage_range
+struct Move{
+    let name: String
+    let damageRange: ClosedRange<Double>
+}
