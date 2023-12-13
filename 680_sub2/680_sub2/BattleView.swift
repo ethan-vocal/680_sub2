@@ -12,18 +12,6 @@ import AVFoundation
 // i also need to implement a way to show a healthbar
 
 // okay healthbar is done, so
-// lets implement an audio soundtrack now. i dont know how to code it. I used this
-// article as a guide: https://stackoverflow.com/questions/31422014/play-background-music-in-app
-
-class AudioManager: ObservableObject {
-    var audioPlayer: AVAudioPlayer?
-    init() {
-
-    }
-
-}
-
-
 
 public struct BattleView: View {
     // i completely forgot to add health into the pokemon, so for simplicity sake ill define the healths here lol
@@ -35,6 +23,8 @@ public struct BattleView: View {
     
     // to hold what moves are played in the turn
     @State private var currentTurnMessages: [String] = []
+    
+    @StateObject private var audioManager: AudioManager = AudioManager()
     
     // to pass down the value into BattleView
     // now we have the pokemon info from last view.
@@ -154,13 +144,39 @@ public struct BattleView: View {
                 .padding()
             }
         }
+        // to call background music func
+        // i use .onAppear and .onDisappear to trigger the correct functions
+        .onAppear(perform: startBackgroundMusic)
+        .onDisappear(perform: stopBackgroundMusic)
     }
-        
+      
+    // start music func
     private func startBackgroundMusic(){
         
+        // grabs the name + extension of file
+        if let soundURL = Bundle.main.url(forResource: "background_music", withExtension: "mp3") {
+            do {
+                //  to play the song and loop it forever: numberofloops = -1
+                let temporaryAudioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+                temporaryAudioPlayer.numberOfLoops = -1
+                
+                // we then play
+                temporaryAudioPlayer.play()
+                print("[debug],startd playing bg")
+                audioManager.audioPlayer = temporaryAudioPlayer
+                // debug catch in case we get error
+            } catch {
+                print("[debug], error getting music")
+            }
+            // debug method
+        } else {
+            print("[debug], not found.")
+        }
     }
+    
+    // calls the stop background music func
     private func stopBackgroundMusic(){
-        
+        audioManager.stopBackgroundMusic()
     }
     
     // logic to perform move
@@ -190,7 +206,7 @@ public struct BattleView: View {
         userHealth -= opponentAttackDamage
         
         // add to log
-        addMoveMessage("\(opponentPokemon.rawValue) used \(opponentMove.name) and dealt \(Int(opponentAttackDamage)) damage.")
+        addMoveMessage("\(opponentPokemon.rawValue) used \(opponentMove.name) and dealt \(Int(opponentAttackDamage)) damage!")
 
         // cecks if anyone wins again
         checkGameResult()
