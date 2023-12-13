@@ -36,6 +36,8 @@ struct HealthBar: View {
                 // creating a rectangle for the repaining health + corresponding color
                 Rectangle()
                     // uses CGFloat - Float is not flexible, whereas CGFloat adapts
+                    
+                    // divide by 200 not 100 to achieve the most accurate bar.
                     .frame(width: min(CGFloat(health) / 200 * geometry.size.width, geometry.size.width), height: 20)
                     .foregroundColor(healthColor)
             }

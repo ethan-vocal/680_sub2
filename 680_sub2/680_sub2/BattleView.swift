@@ -143,8 +143,11 @@ public struct BattleView: View {
             .padding()
             
             // checking if gameresult is not empty. if it is not, then we have a winner. its time to go to the Results page.
-            if gameResult != nil {
-                NavigationLink(destination: Results(),
+            // ^^ ignore, the new way: i set result to result. if its a value then i activate the navigationlink to go to Results
+            
+            // we pass in result, userHealh, opponentHealth, currentTurnMessages so we can access them in Results()
+            if let result = gameResult {
+                NavigationLink(destination: Results(result: result, userRemHealth: userHealth, oppRemHealth: opponentHealth, moveLog: currentTurnMessages),
                 isActive: .constant(true)
                 ) {
                 }
