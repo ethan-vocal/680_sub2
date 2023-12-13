@@ -90,6 +90,7 @@ public struct BattleView: View {
             ForEach(userPokemon.Moveset, id: \.name) { move in
                 Button(action: {
                    // i have to insert the logic here on button press
+                    performMove(_move: move)
                 }) {
                     Text(move.name)
                         .padding()
@@ -101,5 +102,19 @@ public struct BattleView: View {
                 }.padding(.vertical, 4)
             }
         }
+    }
+    
+    // logic to perform move
+    private func performMove(_move: Move) {
+        
+    }
+    
+    // logic to help showcase what move is played
+    private func addMoveMessage(_ message: String) {
+        
+    }
+    // i need a way to check if the game is over
+    private func checkGameResult() {
+        
     }
 }
