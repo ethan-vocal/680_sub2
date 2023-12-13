@@ -15,6 +15,9 @@ public struct BattleView: View {
     @State private var userHealth: Double = 200
     @State private var opponentHealth: Double = 200
 
+    // to hold what moves are played in the turn
+    @State private var currentTurnMessages: [String] = []
+    
     // to pass down the value into BattleView
     // now we have the pokemon info from last view.
     let userPokemon : Pokemon
@@ -23,7 +26,7 @@ public struct BattleView: View {
     
         VStack{
             // based off my sketch, we would want to use a HStack for the layout.
-            
+        
             // the user pokemon display
             HStack{
                 Spacer()
@@ -54,28 +57,48 @@ public struct BattleView: View {
                     Spacer()
                 }
             // now time for the opponent pokemon display. same logic as display user
-            HStack{
-                Spacer()
-                // opp icon
-                Image(opponentPokemon.imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 100)
+                HStack{
+                    Spacer()
+                    // opp icon
+                    Image(opponentPokemon.imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 100, height: 100)
+                        .padding()
+                    VStack{
+                        // opp name
+                        Text("BOT: \(opponentPokemon.rawValue)")
+                            .font(.headline)
+                            .padding()
+                        // opp health
+                        Text("\(Int(userHealth))/200")
+                            .font(.subheadline)
+                            .foregroundColor(.black)
+                            .padding()
+                        // insert healthbar
+                    }
                     .padding()
-                VStack{
-                    // opp name
-                    Text("BOT: \(opponentPokemon.rawValue)")
-                        .font(.headline)
-                        .padding()
-                    // opp health
-                    Text("\(Int(userHealth))/200")
-                        .font(.subheadline)
-                        .foregroundColor(.black)
-                        .padding()
-                    // insert healthbar
+                    Spacer()
                 }
                 .padding()
-                Spacer()
+        }.padding()
+        
+        // display the movelist- should be simple ?
+        VStack{
+            
+            // create a button for each move in Moveset
+            ForEach(userPokemon.Moveset, id: \.name) { move in
+                Button(action: {
+                   // i have to insert the logic here on button press
+                }) {
+                    Text(move.name)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.blue, lineWidth: 2)
+                    )
+                }.padding(.vertical, 4)
             }
         }
     }
