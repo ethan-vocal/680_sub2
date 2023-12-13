@@ -28,27 +28,31 @@ public struct ChosePkmn: View {
             
             // according to https://developer.apple.com/documentation/swiftui/lazyvgrid
             // we use lazyvgrid to display vertical collection of views
-            
-            
-            Image("CharmanderIcon")
-                .resizable()
-                // the icon was way too big, i couldnt see my start battle button
-                // this resizes the icon ot fit.
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 100, height: 100)
-                .padding()
-                
-                // testing the feature
-                .onTapGesture {
-                    selectedPokemon = Pokemon.charmander
-                    print("debug u selected a pokemon")
+            LazyVGrid(columns: Array(repeating: GridItem(), count: 2)) {
+                ForEach(Pokemon.allCases, id: \.self) { pokemon in
+                    // now lets try to add another navigation link. this time on tap we change the selectedPokemon to the corresponding pokemon
+                    NavigationLink(
+                        destination: BattleView(userPokemon: pokemon, opponentPokemon: Pokemon.allCases.randomElement() ?? .pikachu),
+                            isActive: .constant(false),
+                            label: {
+                                Image(pokemon.imageName)
+                                    // reusing the charmander icon code
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 100, height: 100)
+                                    .onTapGesture {
+                                        selectedPokemon = Pokemon.charmander
+                                        //print("debug u selected a pokemon")
+                                    }
+                            })
                 }
-            // i know the button isnt showing. the HStack wasnt in the VStack this whole time lets move it
-            
+            }
             // the button to proceed to next view
             // according to https://developer.apple.com/documentation/swiftui/navigationlink
             //  ^ People click or tap a navigation link to present a view inside a NavigationStack or NavigationSplitView
             // do i need to include a NavigationView as well ?
+            Spacer()
+            
             HStack {
                 Spacer()
                 
@@ -73,6 +77,5 @@ public struct ChosePkmn: View {
                 }
             }.navigationTitle("Pokemon Selection")
         }
-       // Spacer()
     }
 }
