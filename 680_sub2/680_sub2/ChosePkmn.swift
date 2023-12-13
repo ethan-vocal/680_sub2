@@ -12,8 +12,13 @@ import SwiftUI
 // role: to have a user select a pokemon icon to use in battle, and then have them hit another button to start the battle
 
 public struct ChosePkmn: View {
+    // to hold the data for Pokemon
+    @State private var selectedPokemon: Pokemon?
+    // helper for NavigationLink
     @State private var isBattleActive: Bool = false
     public var body: some View{
+        
+        
         // added a navigationview stack?? so hopefully navigationlink works
         NavigationView{
         VStack {
@@ -27,8 +32,17 @@ public struct ChosePkmn: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 100, height: 100)
                 .padding()
+                
+                // testing the feature
+                .onTapGesture {
+                    selectedPokemon = Pokemon.charmander
+                    print("debug u selected a pokemon")
+                }
         }
         Spacer()
+            
+            
+            
         // the button to proceed to next view
         // according to https://developer.apple.com/documentation/swiftui/navigationlink
         //  ^ People click or tap a navigation link to present a view inside a NavigationStack or NavigationSplitView
@@ -40,8 +54,10 @@ public struct ChosePkmn: View {
             // let userPokemon : Pokemon and
             // let opponentPokemon : Pokemon
             
+            
+            // lets set the opponent to have a random pokemon. thanks to enum, we can use .allCases.RandomElement ,, for default value i will set it to Pikachu.
             // current error: missing arugments for parameters
-            NavigationLink(destination: BattleView(),
+            NavigationLink(destination: BattleView(userPokemon: selectedPokemon ?? .pikachu, opponentPokemon: Pokemon.allCases.randomElement() ?? .pikachu),
             isActive: $isBattleActive,
             label: {
             Text("Start Battle")
@@ -49,6 +65,7 @@ public struct ChosePkmn: View {
                 .background(Color.blue)
                 .foregroundColor(.white)
                 .cornerRadius(10)
+            //    print("debug, enter new phase")
             })
                 .padding()
             }
