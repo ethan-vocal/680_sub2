@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        
+        // for contentview, i did ChosePkmn() first because that is the first page I want to load in the app
+        ChosePkmn()
     }
 }
 
