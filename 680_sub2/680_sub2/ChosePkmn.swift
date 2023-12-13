@@ -41,7 +41,10 @@ public struct ChosePkmn: View {
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 100, height: 100)
                                     .onTapGesture {
-                                        selectedPokemon = Pokemon.charmander
+                                        
+                                        // forgot to comment this out, i was wondering why it was only showing charmander. it was messing up my battleview.
+                                        //selectedPokemon = Pokemon.charmander
+                                        selectedPokemon = pokemon
                                         //print("debug u selected a pokemon")
                                     }
                             })
