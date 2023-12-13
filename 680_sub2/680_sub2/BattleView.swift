@@ -6,3 +6,13 @@
 //
 
 import Foundation
+import SwiftUI
+
+public struct BattleView: View {
+    public var body: some View{
+        VStack{
+            Text("hello")
+                .padding()
+        }
+    }
+}
