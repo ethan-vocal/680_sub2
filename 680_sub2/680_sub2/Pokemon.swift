@@ -19,6 +19,10 @@ enum Pokemon: String, CaseIterable{
     case dratini
     case jigglypuff
     case snorlax
+    case flareon
+    case raquaza
+    case togepi
+    
     // if theres a way to attach the "Image("CharmanderIcon") to "charmander" using this method
     var imageName: String {
         return self.rawValue
@@ -46,6 +50,11 @@ enum Pokemon: String, CaseIterable{
             return[.sing, .pound, .doubleSlap, .hyperBeam]
         case .snorlax:
             return[.snore, .hyperBeam, .dragonRush, .takeDown]
+        case .flareon:
+            return[.flareblitz, .firespin, .takeDown, .ember]
+        case .raquaza:
+            return[.outrage, .hyperBeam, .flamethrower, .hydroPump]
+        case .togepi: return[.faketears, .tackle, .hyperBeam, .sing]
         }
     }
     
