@@ -15,6 +15,9 @@ public struct BattleView: View {
     @State private var userHealth: Double = 200
     @State private var opponentHealth: Double = 200
 
+    // hold the value of who wins
+    @State private var gameResult: String?
+    
     // to hold what moves are played in the turn
     @State private var currentTurnMessages: [String] = []
     
@@ -51,7 +54,11 @@ public struct BattleView: View {
                             .padding()
                     
                         // healthBar
-                    
+                        // time to implement this, i would have to pass a double to access the info to display the correct healthbar ?
+                        HealthBar(health: $userHealth)
+                            .frame(width: 150)
+                            .padding()
+ 
                     }
                     .padding()
                     Spacer()
@@ -71,7 +78,7 @@ public struct BattleView: View {
                             .font(.headline)
                             .padding()
                         // opp health
-                        Text("\(Int(userHealth))/200")
+                        Text("\(Int(opponentHealth))/200")
                             .font(.subheadline)
                             .foregroundColor(.black)
                             .padding()
@@ -100,6 +107,23 @@ public struct BattleView: View {
                     )
                 }.padding(.vertical, 4)
             }
+            // text box for showing the moves used
+            // its scrollable
+            ScrollView {
+                VStack(alignment: .leading) {
+                    // goes through array and prints it out in Text
+                    ForEach(currentTurnMessages, id: \.self) { message in
+                        Text(message)
+                            .foregroundColor(.white)
+                            .padding(.vertical, 4)
+                    }
+                }
+            }
+            // setting the opacity / box
+            .frame(height: 100)
+            .background(Color.blue.opacity(0.5))
+            .cornerRadius(10)
+            .padding()
         }
     }
     
@@ -137,10 +161,19 @@ public struct BattleView: View {
     }
     // logic to help showcase what move is played
     private func addMoveMessage(_ message: String) {
-        
+        currentTurnMessages.append(message)
     }
     // i need a way to check if the game is over
     private func checkGameResult() {
+        // simple game logic.
         
+        // if userhealth is less than or equal to 0 then opp win
+        if userHealth <= 0 {
+            gameResult = "Opponent"
+            
+            // if opphealth is less than or equal to 0 then user win
+        } else if opponentHealth <= 0 {
+            gameResult = "Player"
+        }
     }
 }
