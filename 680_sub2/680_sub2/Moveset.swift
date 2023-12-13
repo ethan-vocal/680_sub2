@@ -56,4 +56,7 @@ extension Move {
     static let screech = Move(name: "Screech", damageRange: 7...10)
     static let outrage = Move(name: "Outrage", damageRange: 5...50)
     static let iceBeam = Move(name: "Ice Beam", damageRange: 6...20)
+    
+    // default
+    static let tackle = Move(name: "Tackle", damageRange: 4...10)
 }

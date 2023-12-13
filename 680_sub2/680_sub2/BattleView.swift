@@ -85,12 +85,11 @@ public struct BattleView: View {
         
         // display the movelist- should be simple ?
         VStack{
-            
             // create a button for each move in Moveset
             ForEach(userPokemon.Moveset, id: \.name) { move in
                 Button(action: {
                    // i have to insert the logic here on button press
-                    performMove(_move: move)
+                    performMove(move)
                 }) {
                     Text(move.name)
                         .padding()
@@ -105,10 +104,37 @@ public struct BattleView: View {
     }
     
     // logic to perform move
-    private func performMove(_move: Move) {
+    // found my error: no space between _ and move. which is why it kept throwing me errors.
+    private func performMove(_ move: Move) {
+        // attack damage will be the random between the bounds of damage range of the move
+        let userAttackDamage = Double.random(in: move.damageRange)
         
+        // subracting the opp health with the damage
+        opponentHealth -= userAttackDamage
+        
+        // add to log
+        addMoveMessage("\(userPokemon.rawValue) used \(move.name) and dealt \(Int(userAttackDamage)) damage!")
+        
+        // checks if anyone wins
+        checkGameResult()
+        
+        // opps move
+        
+        // random move from their pokemon, default will be tackle
+        let opponentMove = opponentPokemon.Moveset.randomElement() ?? Move(name: "tackle", damageRange: 5...10)
+        
+        // getting the attack damage, same as earlier
+        let opponentAttackDamage = Double.random(in: opponentMove.damageRange)
+        
+        // subtracting user health with the damage
+        userHealth -= opponentAttackDamage
+        
+        // add to log
+        addMoveMessage("\(opponentPokemon.rawValue) used \(opponentMove.name) and dealt \(Int(opponentAttackDamage)) damage.")
+
+        // cecks if anyone wins again
+        checkGameResult()
     }
-    
     // logic to help showcase what move is played
     private func addMoveMessage(_ message: String) {
         
