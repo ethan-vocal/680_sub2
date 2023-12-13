@@ -18,7 +18,7 @@ enum Pokemon: String, CaseIterable{
     case pikachu
     case dratini
     case jigglypuff
-    
+    case snorlax
     // if theres a way to attach the "Image("CharmanderIcon") to "charmander" using this method
     var imageName: String {
         return self.rawValue
@@ -26,7 +26,7 @@ enum Pokemon: String, CaseIterable{
     
     var Moveset: [Move] {
         switch self{
-        
+
         // first error - Type Move has no member for all the names
         
         // FOR NOW ALL PKMN HAS SAME MOVES AS CHARMANDER
@@ -44,6 +44,8 @@ enum Pokemon: String, CaseIterable{
             return[.dragonRush, .screech, .outrage, .iceBeam]
         case .jigglypuff:
             return[.sing, .pound, .doubleSlap, .hyperBeam]
+        case .snorlax:
+            return[.snore, .hyperBeam, .dragonRush, .takeDown]
         }
     }
     
