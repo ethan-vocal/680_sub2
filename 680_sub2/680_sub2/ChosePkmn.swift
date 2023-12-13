@@ -25,6 +25,11 @@ public struct ChosePkmn: View {
             Text("Choose your Pokemon !")
                 .font(.title)
                 .padding()
+            
+            // according to https://developer.apple.com/documentation/swiftui/lazyvgrid
+            // we use lazyvgrid to display vertical collection of views
+            
+            
             Image("CharmanderIcon")
                 .resizable()
                 // the icon was way too big, i couldnt see my start battle button
@@ -38,37 +43,36 @@ public struct ChosePkmn: View {
                     selectedPokemon = Pokemon.charmander
                     print("debug u selected a pokemon")
                 }
+            // i know the button isnt showing. the HStack wasnt in the VStack this whole time lets move it
+            
+            // the button to proceed to next view
+            // according to https://developer.apple.com/documentation/swiftui/navigationlink
+            //  ^ People click or tap a navigation link to present a view inside a NavigationStack or NavigationSplitView
+            // do i need to include a NavigationView as well ?
+            HStack {
+                Spacer()
+                
+                // that means i need to have arguments for BattleView() if I added
+                // let userPokemon : Pokemon and
+                // let opponentPokemon : Pokemon
+                
+                
+                // lets set the opponent to have a random pokemon. thanks to enum, we can use .allCases.RandomElement ,, for default value i will set it to Pikachu.
+                // current error: missing arugments for parameters
+                NavigationLink(destination: BattleView(userPokemon: selectedPokemon ?? .pikachu, opponentPokemon: Pokemon.allCases.randomElement() ?? .pikachu),
+                isActive: $isBattleActive,
+                label: {
+                Text("Start Battle")
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                //    print("debug, enter new phase")
+                })
+                    .padding()
+                }
+            }.navigationTitle("Pokemon Selection")
         }
-        Spacer()
-            
-            
-            
-        // the button to proceed to next view
-        // according to https://developer.apple.com/documentation/swiftui/navigationlink
-        //  ^ People click or tap a navigation link to present a view inside a NavigationStack or NavigationSplitView
-        // do i need to include a NavigationView as well ?
-        HStack {
-            Spacer()
-            
-            // that means i need to have arguments for BattleView() if I added
-            // let userPokemon : Pokemon and
-            // let opponentPokemon : Pokemon
-            
-            
-            // lets set the opponent to have a random pokemon. thanks to enum, we can use .allCases.RandomElement ,, for default value i will set it to Pikachu.
-            // current error: missing arugments for parameters
-            NavigationLink(destination: BattleView(userPokemon: selectedPokemon ?? .pikachu, opponentPokemon: Pokemon.allCases.randomElement() ?? .pikachu),
-            isActive: $isBattleActive,
-            label: {
-            Text("Start Battle")
-                .padding()
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-            //    print("debug, enter new phase")
-            })
-                .padding()
-            }
-        }.navigationTitle("Pokemon Selection")
+       // Spacer()
     }
 }
