@@ -21,5 +21,9 @@ public struct ChosePkmn: View {
                 .resizable()
                 .padding()
         }
+        HStack {
+            Text("Start Battle")
+                .padding()
+        }
     }
 }
