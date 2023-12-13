@@ -9,6 +9,10 @@ import Foundation
 import SwiftUI
 
 public struct BattleView: View {
+    
+    // to pass down the value into BattleView
+    let userPokemon : Pokemon
+    let opponentPokemon : Pokemon
     public var body: some View{
         VStack{
             Text("hello")
