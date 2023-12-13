@@ -30,18 +30,20 @@ enum Pokemon: String, CaseIterable{
         // first error - Type Move has no member for all the names
         
         // FOR NOW ALL PKMN HAS SAME MOVES AS CHARMANDER
+        
+        // now we can change the values for each pokemon move now.
         case .charmander:
             return[.ember, .metalClaw, .flamethrower, .dragonRage]
         case .bulbasaur:
-            return[.ember, .metalClaw, .flamethrower, .dragonRage]
+            return[.seedBomb, .vineWhip, .razorLeaf, .solarBeam]
         case .squirtle:
-            return[.ember, .metalClaw, .flamethrower, .dragonRage]
+            return[.skullBash, .waterGun, .hydroPump, .bite]
         case .pikachu:
-            return[.ember, .metalClaw, .flamethrower, .dragonRage]
+            return[.voltTackle, .quickAttack, .thunderbolt, .ironTail]
         case .dratini:
-            return[.ember, .metalClaw, .flamethrower, .dragonRage]
+            return[.dragonRush, .screech, .outrage, .iceBeam]
         case .jigglypuff:
-            return[.ember, .metalClaw, .flamethrower, .dragonRage]
+            return[.sing, .pound, .doubleSlap, .hyperBeam]
         }
     }
     
