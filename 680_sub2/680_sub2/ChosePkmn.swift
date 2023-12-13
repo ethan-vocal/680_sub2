@@ -17,9 +17,9 @@ public struct ChosePkmn: View {
             Text("Choose your Pokemon !")
                 .font(.largeTitle)
                 .padding()
+            Image("CharmanderIcon")
+                .resizable()
+                .padding()
         }
-        // placeholder for now
-        Text("Hello, world!")
-            .padding()
     }
 }
