@@ -7,9 +7,24 @@
 
 import Foundation
 import SwiftUI
-
+import AVFoundation
 // perhaps a feature to add is playing a battle song through this view.
 // i also need to implement a way to show a healthbar
+
+// okay healthbar is done, so
+// lets implement an audio soundtrack now. i dont know how to code it. I used this
+// article as a guide: https://stackoverflow.com/questions/31422014/play-background-music-in-app
+
+class AudioManager: ObservableObject {
+    var audioPlayer: AVAudioPlayer?
+    init() {
+
+    }
+
+}
+
+
+
 public struct BattleView: View {
     // i completely forgot to add health into the pokemon, so for simplicity sake ill define the healths here lol
     @State private var userHealth: Double = 200
@@ -125,6 +140,12 @@ public struct BattleView: View {
             .cornerRadius(10)
             .padding()
         }
+    }
+    private func startBackgroundMusic(){
+        
+    }
+    private func stopBackgroundMusic(){
+        
     }
     
     // logic to perform move

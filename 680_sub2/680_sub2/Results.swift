@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct Results: View {
+    var body: some View{
+        
+    }
+}
